@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="itemultra:jar">
+    <output-path>$PROJECT_DIR$/../multigames server/plugins</output-path>
+    <root id="archive" name="itemultra.jar">
+      <element id="module-output" name="itemultra" />
+    </root>
+  </artifact>
+</component>

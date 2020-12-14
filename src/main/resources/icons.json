@@ -1,0 +1,13 @@
+[
+  {
+    "key" : "UNOBTAINIUM",
+    "item" : "minecraft:paper",
+    "title" : "&kFabric of the Unfathomable"
+
+  },
+  {
+    "key" : "EMPTY",
+    "item" : "minecraft:black_stained_glass",
+    "title" : ""
+  }
+]
