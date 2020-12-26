@@ -13,17 +13,22 @@ import java.util.List;
 import java.util.Set;
 
 public class Vault implements Listener {
+    private Icons icons;
+
     private Inventory inventory;
     private int row;
 
     private List<Material> collected;
 
-    public Vault(Set<Material> collected) {
+    public Vault(Icons icons, Set<Material> collected) {
+        this.icons = icons;
+
         inventory = Bukkit.createInventory(null, 9 * 6);
         row = 0;
 
         this.collected = new ArrayList<>(collected);
         this.collected.sort(Comparator.comparing(Enum::toString));
+        updateItemDisplay();
     }
 
     public void showToPlayer(Player player) {
@@ -43,6 +48,8 @@ public class Vault implements Listener {
         while (row < 6) {
             while (col < 7) {
                 if (currentItem >= collected.size()) break insertItems;
+                setItem(col, row, new ItemStack(collected.get(currentItem)));
+                currentItem++;
                 col++;
             }
             col = 0;
@@ -51,6 +58,7 @@ public class Vault implements Listener {
 
         while (row < 6) {
             while (col < 7) {
+                setItem(col, row, icons.getIcon("empty"));
                 col++;
             }
             col = 0;
@@ -59,7 +67,7 @@ public class Vault implements Listener {
 
     }
 
-    private void setItem(Inventory inventory, int x, int y, ItemStack item) {
+    private void setItem(int x, int y, ItemStack item) {
         inventory.setItem(x + 9*y, item);
     }
 }

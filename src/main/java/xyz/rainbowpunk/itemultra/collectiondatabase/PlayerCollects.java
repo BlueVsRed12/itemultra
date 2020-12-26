@@ -11,8 +11,7 @@ import java.util.Set;
 
 public class PlayerCollects {
     private Map<Material, Instant> collected;
-
-
+    
     public PlayerCollects() {
         collected = new HashMap<>();
     }
@@ -23,5 +22,9 @@ public class PlayerCollects {
 
     public boolean isCollected(Material item) {
         return collected.containsKey(item);
+    }
+
+    public Set<Material> getCollectedMaterials() {
+        return collected.keySet();
     }
 }

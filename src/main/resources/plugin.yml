@@ -5,3 +5,5 @@ api-version: 1.16
 commands:
   vault:
     description: Opens the Ultra Vault.
+  unobtainium:
+    description: Obtain the unobtainable.

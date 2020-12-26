@@ -7,6 +7,10 @@ import java.util.*;
 public class CollectionDatabase {
     private Map<UUID, PlayerCollects> db;
 
+    public CollectionDatabase() {
+        db = new HashMap<>();
+    }
+
     private void createPlayer(UUID uuid) {
         db.put(uuid, new PlayerCollects());
     }

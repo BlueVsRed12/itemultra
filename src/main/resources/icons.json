@@ -1,13 +1,16 @@
 [
   {
-    "key" : "UNOBTAINIUM",
-    "item" : "minecraft:paper",
-    "title" : "&kFabric of the Unfathomable"
-
+    "key" : "unobtainium",
+    "item" : "paper",
+    "title" : "&8&kFabric of the Unfathomable",
+    "lore" : [
+      "&7It looks like a page of a &kbook&7...",
+      "&7What's it doing here...?"
+    ]
   },
   {
-    "key" : "EMPTY",
-    "item" : "minecraft:black_stained_glass",
-    "title" : ""
+    "key" : "empty",
+    "item" : "black_stained_glass_pane",
+    "title" : "&f"
   }
 ]

@@ -1,41 +1,73 @@
 package xyz.rainbowpunk.itemultra.vault;
 
 import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import xyz.rainbowpunk.itemultra.Util;
 
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Icons {
-    private Map<String, ItemStack> icons;
+    private final Map<String, ItemStack> icons;
 
     public Icons(String json) {
-        Gson gson = new Gson();
-        JsonElement root = gson.toJsonTree(json);
-        JsonArray jsonIconArray = root.getAsJsonArray();
-        for (JsonElement jsonIcon : jsonIconArray) {
+        icons = new HashMap<>();
+        createIcons(json);
+    }
 
+    public ItemStack getIcon(String key) {
+        return icons.get(key);
+    }
+
+    public void test(Player player) {
+        for (ItemStack item : icons.values()) {
+            player.getInventory().addItem(item);
         }
     }
 
-    private ItemStack createIcon(JsonObject object) {
-        JsonPrimitive key = object.getAsJsonPrimitive("key");
+    private void createIcons(String json) {
+        JsonElement root = new JsonParser().parse(json);
+        JsonArray jsonIconArray = root.getAsJsonArray();
+        for (JsonElement jsonIcon : jsonIconArray) {
+            createIcon(jsonIcon.getAsJsonObject());
+        }
+    }
 
-        Material material = Material.getMaterial(object.getAsJsonPrimitive("item").toString());
-        String title = object.getAsJsonPrimitive("title").toString();
+    private void createIcon(JsonObject object) {
+        String key = object.getAsJsonPrimitive("key").getAsString();
+
+        Material material = Material.matchMaterial(object.getAsJsonPrimitive("item").getAsString());
+        ItemStack item = new ItemStack(material);
+        ItemMeta meta = item.getItemMeta();
+
+        String title = object.getAsJsonPrimitive("title").getAsString();
         title = color(title); // make sure minecraft colors work
+        meta.setDisplayName(title);
 
-        if (object.has(""));
-        return null; // todo: don't forget about this
+        if (object.has("lore")) {
+            List<String> lore = new ArrayList<>();
+            JsonArray jsonLoreArray = object.getAsJsonArray("lore");
+            for (JsonElement jsonLoreLine : jsonLoreArray) {
+                lore.add(color(jsonLoreLine.getAsString()));
+            }
+            meta.setLore(lore);
+        }
+
+        item.setItemMeta(meta);
+
+        icons.put(key, item);
     }
 
     private String color(String string) {
-        string = Util.translateColor('`', string);
-        string = string.replace("&", "  ");
-        return string;
+        return Util.translateColor(string);
     }
 }
