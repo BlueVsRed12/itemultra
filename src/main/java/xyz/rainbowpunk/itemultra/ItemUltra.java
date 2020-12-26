@@ -1,5 +1,6 @@
 package xyz.rainbowpunk.itemultra;
 
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.rainbowpunk.itemultra.collectiondatabase.CollectionDatabase;
 import xyz.rainbowpunk.itemultra.commands.UnobtainiumCommand;
