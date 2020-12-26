@@ -10,21 +10,21 @@ import java.util.Map;
 import java.util.Set;
 
 public class PlayerCollects {
-    private Map<Material, Instant> collected;
+    private Set<Material> collected;
     
     public PlayerCollects() {
-        collected = new HashMap<>();
+        collected = new HashSet<>();
     }
 
     public void collect(Material item) {
-        collected.put(item, Instant.now());
+        collected.add(item);
     }
 
     public boolean isCollected(Material item) {
-        return collected.containsKey(item);
+        return collected.contains(item);
     }
 
     public Set<Material> getCollectedMaterials() {
-        return collected.keySet();
+        return collected;
     }
 }

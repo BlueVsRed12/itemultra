@@ -1,6 +1,7 @@
 package xyz.rainbowpunk.itemultra;
 
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.rainbowpunk.itemultra.collectiondatabase.CollectionDatabase;
 import xyz.rainbowpunk.itemultra.commands.UnobtainiumCommand;
@@ -16,7 +17,15 @@ public class ItemUltra extends JavaPlugin {
         icons = new Icons(Util.resourceToString("/icons.json"));
         db = new CollectionDatabase();
 
-        getCommand("vault").setExecutor(new VaultCommand(icons, db));
+        getCommand("vault").setExecutor(new VaultCommand(this, icons, db));
         getCommand("unobtainium").setExecutor(new UnobtainiumCommand(icons));
+    }
+
+    public void registerListener(Listener listener) {
+        getServer().getPluginManager().registerEvents(listener, this);
+    }
+
+    public void unregisterListener(Listener listener) {
+        HandlerList.unregisterAll(listener);
     }
 }
