@@ -28,12 +28,6 @@ public class Icons {
         return icons.get(key);
     }
 
-    public void test(Player player) {
-        for (ItemStack item : icons.values()) {
-            player.getInventory().addItem(item);
-        }
-    }
-
     private void createIcons(String json) {
         JsonElement root = new JsonParser().parse(json);
         JsonArray jsonIconArray = root.getAsJsonArray();
