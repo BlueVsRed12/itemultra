@@ -11,17 +11,23 @@ import xyz.rainbowpunk.itemultra.collectiondatabase.CollectionDatabase;
 import xyz.rainbowpunk.itemultra.vault.Icons;
 import xyz.rainbowpunk.itemultra.vault.Vault;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class VaultCommand implements CommandExecutor {
     private ItemUltra plugin;
-    private CollectionDatabase db;
-
     private Icons icons;
+
+    private CollectionDatabase db;
+    private Map<UUID, Vault> vaultMap;
 
     public VaultCommand(ItemUltra plugin, Icons icons, CollectionDatabase db) {
         this.plugin = plugin;
-        this.db = db;
-
         this.icons = icons;
+
+        this.db = db;
+        vaultMap = new HashMap<>();
     }
 
     @Override
@@ -29,13 +35,15 @@ public class VaultCommand implements CommandExecutor {
         if (!(sender instanceof Player)) return true;
         Player player = (Player) sender;
 
-        Vault vault = new Vault(
-                plugin,
-                icons,
-                player.getUniqueId(),
-                db.getPlayerCollects(player.getUniqueId()));
+        Vault vault = getPlayerVault(player.getUniqueId());
         vault.showToPlayer(player);
 
         return true;
+    }
+
+    private Vault getPlayerVault(UUID uuid) {
+        if (vaultMap.get(uuid) == null)
+            vaultMap.put(uuid, new Vault(plugin, icons, uuid, db.getPlayerCollects(uuid)));
+        return vaultMap.get(uuid);
     }
 }
