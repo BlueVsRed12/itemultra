@@ -1,8 +1,8 @@
 package xyz.rainbowpunk.itemultra.collectiondatabase;
 
-import org.bukkit.Material;
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class CollectionDatabase {
     private Map<UUID, PlayerCollects> db;
@@ -11,12 +11,12 @@ public class CollectionDatabase {
         db = new HashMap<>();
     }
 
-    private void createPlayer(UUID uuid) {
-        db.put(uuid, new PlayerCollects());
+    public PlayerCollects getPlayerCollects(UUID uuid) {
+        if (db.get(uuid) == null) createPlayer(uuid);
+        return db.get(uuid);
     }
 
-    public PlayerCollects getPlayerCollects(UUID uuid) {
-        if (db.get(uuid) == null) db.put(uuid, new PlayerCollects());
-        return db.get(uuid);
+    private void createPlayer(UUID uuid) {
+        db.put(uuid, new PlayerCollects());
     }
 }
