@@ -1,12 +1,8 @@
 package xyz.rainbowpunk.itemultra.collectiondatabase;
 
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
-import java.time.Instant;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class PlayerCollects {

@@ -21,6 +21,11 @@ public class ItemUltra extends JavaPlugin {
         getCommand("unobtainium").setExecutor(new UnobtainiumCommand(icons));
     }
 
+    @Override
+    public void onDisable() {
+
+    }
+
     public void registerListener(Listener listener) {
         getServer().getPluginManager().registerEvents(listener, this);
     }

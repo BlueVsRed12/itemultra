@@ -151,7 +151,7 @@ public class Vault {
         setItem(8, 1, sortIcon);
 
         setItem(8, 2, icons.getIcon("search"));
-        setItem(8, 3, icons.getIcon((row > 0) ? "up" : "empty"));
+        setItem(8, 3, icons.getIcon((row > 0) ? "up" : "empty")); // Placeholder row navigation
         setItem(8, 4, icons.getIcon("empty"));  // Placeholder row navigation
         setItem(8, 5, icons.getIcon("down"));   // Placeholder row navigation
     }

@@ -41,7 +41,7 @@ public class VaultListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         if (!event.getWhoClicked().getUniqueId().equals(vault.getPlayerUUID())) return;
         if (event.getClickedInventory() == null) return;
-        putIntoVaultCheck(event);
+        putIntoVaultCheck(event); //todo: maybe replace this with some kind of event system?
         clickIconCheck(event);
     }
 
@@ -52,7 +52,7 @@ public class VaultListener implements Listener {
         ItemStack clickedItem = event.getCurrentItem();
         if (clickedItem == null) return;
         vault.getPlayerCollects().collect(clickedItem.getType());
-        vault.updateDisplay(); //todo: maybe replace this with some kind of event system?
+        vault.updateDisplay();
 
         event.setCancelled(true);
     }
