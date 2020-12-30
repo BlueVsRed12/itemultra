@@ -7,3 +7,7 @@ commands:
     description: Opens the Ultra Vault.
   unobtainium:
     description: Obtain the unobtainable.
+  collecteverything:
+    description: Collect everything that could possibly be collected.
+  emptycollects:
+    description: Wipe everything you've collected.
