@@ -9,9 +9,13 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import xyz.rainbowpunk.itemultra.ItemUltra;
+import xyz.rainbowpunk.itemultra.collectiondatabase.Collectable;
+import xyz.rainbowpunk.itemultra.collectiondatabase.Collectables;
 
 public class VaultListener implements Listener {
     private ItemUltra plugin;
+    // todo: should really not be handing collection work in a VaultListener. need to hand this off to an events api or something in the future.
+    private Collectables collectables;
     private Vault vault;
 
     private final static int UNCOLLECTED_SLOT = 8;
@@ -22,6 +26,7 @@ public class VaultListener implements Listener {
 
     public VaultListener(ItemUltra plugin, Vault vault) {
         this.plugin = plugin;
+        collectables = plugin.getCollectables();
         this.vault = vault;
     }
 
@@ -47,18 +52,23 @@ public class VaultListener implements Listener {
 
     private void putIntoVaultCheck(InventoryClickEvent event) {
         if (event.getClickedInventory().getType() != InventoryType.PLAYER) return;
+        event.setCancelled(true);
+
         if (event.getClick() != ClickType.LEFT) return;
 
         ItemStack clickedItem = event.getCurrentItem();
         if (clickedItem == null) return;
-        vault.getPlayerCollects().collect(clickedItem.getType());
-        vault.updateDisplay();
+        Collectable collectable = collectables.getCollectableEquivalent(clickedItem);
+        if (collectable == null) return;
 
-        event.setCancelled(true);
+        vault.getPlayerCollects().collect(collectable);
+        vault.updateDisplay();
     }
 
     private void clickIconCheck(InventoryClickEvent event) {
         if (event.getClickedInventory().getType() != InventoryType.CHEST) return;
+        event.setCancelled(true);
+
         int slot = event.getSlot();
         switch (slot) {
             case UNCOLLECTED_SLOT: vault.toggleUncollectedVisibility(); break;
@@ -66,7 +76,6 @@ public class VaultListener implements Listener {
             case UP_SLOT: vault.scrollUp(); break;
             case DOWN_SLOT: vault.scrollDown(); break;
         }
-        event.setCancelled(true);
     }
 
     private void unregister() {

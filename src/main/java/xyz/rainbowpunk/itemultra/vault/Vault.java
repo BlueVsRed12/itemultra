@@ -1,14 +1,13 @@
 package xyz.rainbowpunk.itemultra.vault;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.DoubleChestInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import xyz.rainbowpunk.itemultra.ItemUltra;
 import xyz.rainbowpunk.itemultra.Util;
+import xyz.rainbowpunk.itemultra.collectiondatabase.Collectable;
 import xyz.rainbowpunk.itemultra.collectiondatabase.PlayerCollects;
 
 import java.util.ArrayList;
@@ -100,8 +99,9 @@ public class Vault {
     }
 
     private void updateItemDisplay() {
-        List<Material> collected = new ArrayList<>(playerCollects.getCollectedMaterials());
-        collected.sort(Comparator.comparing(Enum::toString));
+        List<ItemStack> items = new ArrayList<>();
+        playerCollects.getCollected().forEach(collected -> items.add(collected.getCollectable().getItem()));
+        items.sort(Comparator.comparing(a -> a.getType().name()));
 
         int currentItem = row * 7;
         int row = 0;
@@ -110,8 +110,8 @@ public class Vault {
         insertItems:
         while (row < 6) {
             while (col < 7) {
-                if (currentItem >= collected.size()) break insertItems;
-                setItem(col, row, new ItemStack(collected.get(currentItem)));
+                if (currentItem >= items.size()) break insertItems;
+                setItem(col, row, items.get(currentItem));
                 currentItem++;
                 col++;
             }
