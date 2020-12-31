@@ -1,77 +1,83 @@
 [
   {
-    "key" : "unobtainium",
-    "item" : "paper",
-    "title" : "&8&kFabric of the Unfathomable",
-    "lore" : [
+    "key": "unobtainium",
+    "item": "paper",
+    "title": "&8&kFabric of the Unfathomable",
+    "lore": [
       "&7It looks like a page of a &kbook&7...",
       "&7What's it doing here...?"
     ]
   },
   {
-    "key" : "empty",
-    "item" : "black_stained_glass_pane",
-    "title" : "&f"
+    "key": "empty",
+    "item": "black_stained_glass_pane",
+    "title": "&f"
   },
   {
-    "key" : "show_uncollected",
-    "item" : "beacon",
-    "title" : "&8|&3|&b|&f| Showing Uncollected Items"
+    "key": "show_uncollected",
+    "item": "beacon",
+    "title": "&8|&3|&b|&f| Showing Uncollected Items"
   },
   {
-    "key" : "hide_uncollected",
-    "item" : "conduit",
-    "title" : "&8|&3|&b|&f| Hiding Uncollected Items"
+    "key": "hide_uncollected",
+    "item": "conduit",
+    "title": "&8|&3|&b|&f| Hiding Uncollected Items"
   },
   {
-    "key" : "sort_alphabetically",
-    "item" : "apple",
-    "title" : "&8|&3|&b|&f| Sorting Alphabetically"
+    "key": "sort_alphabetically",
+    "item": "apple",
+    "title": "&8|&3|&b|&f| Sorting Alphabetically"
   },
   {
-    "key" : "sort_alphabetically_descending",
-    "item" : "zombie_head",
-    "title" : "&8|&3|&b|&f| Sorting Alphabetically &7&o(Descending)"
+    "key": "sort_alphabetically_descending",
+    "item": "zombie_head",
+    "title": "&8|&3|&b|&f| Sorting Alphabetically &7&o(Descending)"
   },
   {
-    "key" : "sort_time",
-    "item" : "diamond_ore",
-    "title" : "&8|&3|&b|&f| Sorting Collection Date"
+    "key": "sort_time",
+    "item": "diamond_ore",
+    "title": "&8|&3|&b|&f| Sorting Collection Date"
   },
   {
-    "key" : "sort_time_descending",
-    "item" : "iron_ore",
-    "title" : "&8|&3|&b|&f| Sorting Collection Date &7&o(Descending)"
+    "key": "sort_time_descending",
+    "item": "iron_ore",
+    "title": "&8|&3|&b|&f| Sorting Collection Date &7&o(Descending)"
   },
   {
-    "key" : "sort_id",
-    "item" : "stone",
-    "title" : "&8|&3|&b|&f| Sorting by ID",
+    "key": "sort_id",
+    "item": "stone",
+    "title": "&8|&3|&b|&f| Sorting by ID",
     "lore": [
       "    &8&o(Creative inventory order)"
     ]
   },
   {
-    "key" : "sort_id_descending",
-    "item" : "respawn_anchor",
-    "title" : "&8|&3|&b|&f| Sorting by ID &7&o(Descending)",
+    "key": "sort_id_descending",
+    "item": "respawn_anchor",
+    "title": "&8|&3|&b|&f| Sorting by ID &7&o(Descending)",
     "lore": [
       "    &8&o(Reverse creative inventory order)"
     ]
   },
   {
-    "key" : "search",
-    "item" : "lectern",
-    "title" : "&8|&3|&b|&f| Search &8&o(Find items by typing)"
+    "key": "search",
+    "item": "lectern",
+    "title": "&8|&3|&b|&f| Search &8&o(Find items by typing)"
   },
   {
-    "key" : "up",
-    "item" : "spectral_arrow",
-    "title" : "&8|&3|&b|&f| Up 1 row"
+    "key": "up",
+    "item": "spectral_arrow",
+    "title": "&8|&3|&b|&f| Up 1 row",
+    "lore": [
+      "&8|&7|&f|| &7&o(Shift + Left Click) &7Up 3 rows"
+    ]
   },
   {
-    "key" : "down",
-    "item" : "spectral_arrow",
-    "title" : "&8|&3|&b|&f| Down 1 row"
+    "key": "down",
+    "item": "spectral_arrow",
+    "title": "&8|&3|&b|&f| Down 1 row",
+    "lore": [
+      "&8|&7|&f|| &7&o(Shift + Left Click) &7Down 3 rows"
+    ]
   }
 ]
