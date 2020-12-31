@@ -21,7 +21,7 @@ public class EmptyCollectsCommand implements CommandExecutor {
         if (!(sender instanceof Player)) return true;
         Player player = (Player) sender;
 
-        db.getPlayerCollects(player.getUniqueId()).getCollected().clear();
+        db.getPlayerCollects(player.getUniqueId()).clearCollected();
         return true;
     }
 }

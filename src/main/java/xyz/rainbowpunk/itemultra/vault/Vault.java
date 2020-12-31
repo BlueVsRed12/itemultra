@@ -7,13 +7,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import xyz.rainbowpunk.itemultra.ItemUltra;
 import xyz.rainbowpunk.itemultra.Util;
-import xyz.rainbowpunk.itemultra.collectiondatabase.Collectable;
+import xyz.rainbowpunk.itemultra.collectiondatabase.Collected;
 import xyz.rainbowpunk.itemultra.collectiondatabase.PlayerCollects;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 enum Sort {
     ALPHABETICALLY,
@@ -55,6 +52,7 @@ public class Vault {
     }
 
     public void showToPlayer(Player player) {
+        updateDisplay();
         plugin.registerListener(listener);
         player.openInventory(inventory);
     }
@@ -84,12 +82,21 @@ public class Vault {
     }
 
     public void scrollUp() {
-        if (row > 0) row--;
+        scrollUp(1);
+    }
+
+    public void scrollUp(int num) {
+        if (row > -1 + num) row -= num;
+        else if (row != 0) row = 0;
         updateDisplay();
     }
 
     public void scrollDown() {
-        row++;
+        scrollDown(1);
+    }
+
+    public void scrollDown(int num) {
+        row += num;
         updateDisplay();
     }
 
@@ -99,9 +106,9 @@ public class Vault {
     }
 
     private void updateItemDisplay() {
-        List<ItemStack> items = new ArrayList<>();
-        playerCollects.getCollected().forEach(collected -> items.add(collected.getCollectable().getItem()));
-        items.sort(Comparator.comparing(a -> a.getType().name()));
+        // todo: have the vault not re-sort the entire list every time the display needs to be updated
+        List<Collected> collectedList = new ArrayList<>(playerCollects.getCollectedSet());
+        sort(collectedList);
 
         int currentItem = row * 7;
         int row = 0;
@@ -110,8 +117,8 @@ public class Vault {
         insertItems:
         while (row < 6) {
             while (col < 7) {
-                if (currentItem >= items.size()) break insertItems;
-                setItem(col, row, items.get(currentItem));
+                if (currentItem >= collectedList.size()) break insertItems;
+                setItem(col, row, collectedList.get(currentItem).getCollectable().getItem());
                 currentItem++;
                 col++;
             }
@@ -127,6 +134,21 @@ public class Vault {
             col = 0;
             row++;
         }
+    }
+
+    private void sort(List<Collected> collectedList) {
+        switch (sortingBy) {
+            case ALPHABETICALLY:
+                collectedList.sort(Comparator.comparing(a -> a.getCollectable().getDisplayName().toLowerCase()));
+                break;
+            case TIMESTAMP:
+                collectedList.sort(Comparator.comparing(Collected::getTimeCollected));
+                break;
+            case ID:
+                collectedList.sort(Comparator.comparing(a -> a.getCollectable().getOrderId()));
+                break;
+        }
+        if (sortDescending) Collections.reverse(collectedList);
     }
 
     private void updateControlDisplay() {

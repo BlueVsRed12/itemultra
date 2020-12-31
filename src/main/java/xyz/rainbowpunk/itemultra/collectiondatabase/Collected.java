@@ -19,4 +19,8 @@ public class Collected {
     public Collectable getCollectable() {
         return collectable;
     }
+
+    public Instant getTimeCollected() {
+        return timeCollected;
+    }
 }
