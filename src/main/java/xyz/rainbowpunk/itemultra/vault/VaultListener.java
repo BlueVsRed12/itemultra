@@ -73,9 +73,18 @@ public class VaultListener implements Listener {
         switch (slot) {
             case UNCOLLECTED_SLOT: vault.toggleUncollectedVisibility(); break;
             case SORTING_SLOT: vault.changeSorting(event.getClick()); break;
-            case UP_SLOT: vault.scrollUp(); break;
-            case DOWN_SLOT: vault.scrollDown(); break;
+            case UP_SLOT: scroll(event.getClick(), true); break;
+            case DOWN_SLOT: scroll(event.getClick(), false); break;
         }
+    }
+
+    private void scroll(ClickType clickType, boolean up) {
+        int rows = 0;
+        if (clickType == ClickType.LEFT) rows = 1;
+        else if (clickType == ClickType.SHIFT_LEFT) rows = 3;
+
+        if (up) vault.scrollUp(rows);
+        else vault.scrollDown(rows);
     }
 
     private void unregister() {
